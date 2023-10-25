@@ -3,20 +3,24 @@ from enum import Enum
 
 
 class MessageType(Enum):
-    GetService = 2
-    StateService = 3
-    GetPower = 20
-    SetPower = 21
-    StatePower = 22
-    GetLabel = 23
-    StateLabel = 25
-    Acknowledgement = 45
+    GET_SERVICE = 2
+    STATE_SERVICE = 3
+    GET_POWER = 20
+    SET_POWER = 21
+    STATE_POWER = 22
+    GET_LABEL = 23
+    STATE_LABEL = 25
+    ACKNOWLEDGEMENT = 45
+    GET_COLOR = 101
+    SET_COLOR = 102
+    LIGHT_STATE = 107
 
 
 class MessageEncoder:
-    HEADER_SIZE_BYTES = 36
-    SOURCE_INDEX = 2
-    __sequence = -1
+    HEADER_SIZE_BYTES: int = 36
+    SOURCE_INDEX: int = 2
+    __sequence: int = -1
+    MAX_UINT16: int = 65535
 
     @staticmethod
     def get_sequence() -> int:
@@ -25,7 +29,7 @@ class MessageEncoder:
 
     def __init__(
             self,
-            msg_type: MessageType = MessageType.GetService,
+            msg_type: MessageType = MessageType.GET_SERVICE,
             ack_required: bool = False,
             res_required: bool = False,
             payload: dict = None

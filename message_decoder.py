@@ -93,31 +93,48 @@ class MessageDecoder:
         return struct.unpack("<H", self[32:34])[0]
 
     @property
-    def payload(self):
+    def payload(self) -> dict:
         payload_data = self[36:]
         match self.pkt_type:
-            case MessageType.GetService.value:  # 2
-                return payload_data.decode("utf-8").rstrip('\x00')
+            case MessageType.GET_SERVICE.value:  # 2
+                return {'payload': payload_data}
 
-            case MessageType.StateService.value:  # 3
-                service = Services[int(payload_data[0])]
-                port = int.from_bytes(payload_data[1:5], byteorder='little', signed=False)
-                return service, port
+            case MessageType.STATE_SERVICE.value:  # 3
+                return {
+                    'service': Services[int(payload_data[0])],
+                    'port': int.from_bytes(payload_data[1:5], byteorder='little', signed=False)
+                }
 
-            case MessageType.GetPower.value:  # 20
-                return payload_data.decode("utf-8").rstrip('\x00')
+            case MessageType.GET_POWER.value:  # 20
+                return {'payload': payload_data}
 
-            case MessageType.StatePower.value:  # 22
-                return struct.unpack('<H', payload_data)[0]
+            case MessageType.STATE_POWER.value:  # 22
+                return {'power': int.from_bytes(payload_data[0:2], byteorder='little', signed=False)}
 
-            case MessageType.GetLabel.value:  # 23
-                return payload_data.decode("utf-8").rstrip('\x00')
+            case MessageType.GET_LABEL.value:  # 23
+                return {'payload': payload_data}
 
-            case MessageType.StateLabel.value:  # 25
-                return payload_data.decode("utf-8").rstrip('\x00')
+            case MessageType.STATE_LABEL.value:  # 25
+                return {'label': payload_data.decode("utf-8").rstrip('\x00')}
 
-            case MessageType.Acknowledgement.value:  # 45
-                return None
+            case MessageType.ACKNOWLEDGEMENT.value:  # 45
+                return {'acknowledgement': True}
+
+            case MessageType.GET_COLOR.value:  # 101
+                return {'payload': payload_data}
+
+            case MessageType.SET_COLOR.value:  # 102
+                return {'payload': payload_data}
+
+            case MessageType.LIGHT_STATE.value:  # 107
+                return {
+                    'label': payload_data[12:44].decode("utf-8").rstrip('\x00'),
+                    'power': int.from_bytes(payload_data[10:12], byteorder='little', signed=False),
+                    'hue': int.from_bytes(payload_data[0:2], byteorder='little', signed=False),
+                    'saturation': int.from_bytes(payload_data[2:4], byteorder='little', signed=False),
+                    'brightness': int.from_bytes(payload_data[4:6], byteorder='little', signed=False),
+                    'kelvin': int.from_bytes(payload_data[6:8], byteorder='little', signed=False)
+                }
 
             case _:
                 raise ValueError(f"Unsupported packet type: {self.pkt_type}")
