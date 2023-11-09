@@ -42,7 +42,7 @@ class MessageMaker:
                 saturation: float = 1,
                 brightness: float = 1,
                 kelvin: int = 4000,
-                duration: int = 1
+                duration: int = 100
         ):
             self.hue = hue % 360
             self.saturation: float = max(0.0, min(1.0, saturation))

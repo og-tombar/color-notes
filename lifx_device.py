@@ -80,7 +80,7 @@ class LifxDevice:
             saturation: int = 1,
             brightness: int = 1,
             kelvin: int = 4000,
-            duration: int = 1
+            duration: int = 100
     ):
 
         return await self.send_and_await_response(MessageMaker.SetColor(

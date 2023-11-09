@@ -10,7 +10,10 @@ class LifxDeviceSet:
 
     def __init__(self):
         print('Initializing LIFX Device Set')
+        self.lock = asyncio.Lock()
         self.devices: list[LifxDevice] = []
+        self.is_transmitting: bool = False
+        self.current_hue: float = 0
 
     @property
     async def info(self) -> str:
@@ -29,44 +32,62 @@ class LifxDeviceSet:
         print(f'Async discovery completed.')
         return devices
 
+    async def async_set_transmitting(self, transmitting: bool = True):
+        async with self.lock:
+            self.is_transmitting = transmitting
+
     async def all_devices_do(self, method: str = 'set_power', args: dict = None) -> tuple:
         return await asyncio.gather(*[device.do(method, args) for device in self.devices])
 
     async def all_devices_get(self, prop: str = 'service') -> tuple:
         return await asyncio.gather(*[device.get(prop) for device in self.devices])
 
-    async def test_get_all_labels(self):
+    async def start_transmitting_converter_hue_to_all_devices(self) -> None:
+        await self.async_set_transmitting(True)
+        while self.is_transmitting:
+            new_hue = await Globals.converter.async_get_current_hue()
+            if new_hue == self.current_hue:
+                await asyncio.sleep(0)
+            elif new_hue == -1:
+                await self.all_devices_do('set_color', {'saturation': 0, 'kelvin': 5000})
+            else:
+                await self.all_devices_do('set_color', {'saturation': 1, 'hue': new_hue})
+            async with self.lock:
+                self.current_hue = new_hue
+
+    async def test_get_all_labels(self) -> tuple:
         return await self.all_devices_get('label')
 
-    async def test_turn_on(self):
+    async def test_turn_on(self) -> tuple:
         return await self.all_devices_do('turn_on')
 
-    async def test_turn_off(self):
+    async def test_turn_off(self) -> tuple:
         return await self.all_devices_do('turn_off')
 
-    async def test_toggle_power(self):
+    async def test_toggle_power(self) -> tuple:
         return await self.all_devices_do('toggle_power')
 
-    async def test_get_all_colors(self):
+    async def test_get_all_colors(self) -> tuple:
         return await self.all_devices_get('color')
 
-    async def test_set_color_default(self):
+    async def test_set_color_default(self) -> tuple:
         return await self.all_devices_do('set_color')
 
-    async def test_set_color_saturation_0(self):
+    async def test_set_color_saturation_0(self) -> tuple:
         return await self.all_devices_do('set_color', {'saturation': 0})
 
-    async def test_set_color_brightness_half(self):
+    async def test_set_color_brightness_half(self) -> tuple:
         return await self.all_devices_do('set_color', {'brightness': 0.5})
 
-    async def test_set_color_kelvin_3000(self):
+    async def test_set_color_kelvin_3000(self) -> tuple:
         return await self.all_devices_do('set_color', {'kelvin': 3000})
 
-    async def test_cycle_color_wheel(self):
+    async def test_cycle_color_wheel(self) -> tuple:
         start_time = time.time()
         for i in range(100):
             print(i)
             await asyncio.sleep(0.05)
             await self.all_devices_do('set_color', {'hue': 180 * (i % 2)})
         print((time.time() - start_time) / 360)
-        return {'result': True}
+        return {'result': True},
+
