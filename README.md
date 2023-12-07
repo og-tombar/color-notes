@@ -15,7 +15,7 @@ Color Notes is a MIDI-controlled smart lighting system designed to synchronize t
 ### Notes to Hue Converter
 * Maintains a collection of notes, representing the current notes being played by a musical instrument.
 * Converts MIDI note information (pitch, velocity) into corresponding color and intensity values for the smart lights.
-* Implements a weighted average algorithm to determine the overall color based on the notes' pitches and velocities. The mathematical portion of this algorithm can be found to the bottom of this document.
+* Implements a weighted average algorithm to determine the overall color based on the notes' pitches and velocities. The mathematical portion of this algorithm can be found in this [this link](https://www.mathcha.io/editor/jm9mrcODsYQuDrWK0Df5d8P29i01NmQqUNBNWZV).
 * When a note is added or removed from the list of currently played notes, the current color is updated.
 
 
@@ -57,5 +57,3 @@ Color Notes is a MIDI-controlled smart lighting system designed to synchronize t
 * After a physical device receives a message, it sends back a response UDP packet.
 * __Message Router__ listens to the incoming packets, transforms them to high-level messages, and sends them back to the corresponding __LIFX Devices.__
 * After every physical device on the network returned a response, the loop continues to the next iteration.
-
-<iframe frameBorder="0" width="100%" height="100%" style="min-width: 400px; min-height:400px" src="https://www.mathcha.io/editor/jm9mrcODsYQuDrWK0Df5d8P29i01NmQqUNBNWZV?embedded=true" ></iframe>
