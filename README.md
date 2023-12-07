@@ -58,7 +58,4 @@ Color Notes is a MIDI-controlled smart lighting system designed to synchronize t
 * __Message Router__ listens to the incoming packets, transforms them to high-level messages, and sends them back to the corresponding __LIFX Devices.__
 * After every physical device on the network returned a response, the loop continues to the next iteration.
 
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
-
-$`\sum_{i=1}^{k} v_{\overline{x}_{i}} \cdot \left| \text{hue}(\overline{p_{\overline{x}_{i}}}) -\frac{\sum_{i=1}^{k} \left[ v_{\overline{x}_{i}} \cdot \text{hue}(\overline{p_{\overline{x}_{i}}})\right]}{\sum_{i=1}^{k} v_{\overline{x}_{i}}} \right| \leq \sum_{i=1}^{k} v_{x_{i}} \cdot \left| \text{hue}(\overline{p_{x_{i}}}) -\frac{\sum_{i=1}^{k} \left[ v_{x_{i}} \cdot \text{hue}(\overline{p_{x_{i}}})\right]}{\sum_{i=1}^{k} v_{x_{i}}} \right|
-`$
+<iframe frameBorder="0" width="100%" height="100%" style="min-width: 400px; min-height:400px" src="https://www.mathcha.io/editor/jm9mrcODsYQuDrWK0Df5d8P29i01NmQqUNBNWZV?embedded=true" ></iframe>
