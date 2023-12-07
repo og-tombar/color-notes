@@ -60,4 +60,5 @@ Color Notes is a MIDI-controlled smart lighting system designed to synchronize t
 
 $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
 
-$`\sum _{i=1}^{k} v_{\overline{x}_{i}} \cdotp \left| hue\left(\overline{p_{\overline{x}_{i}}}\right) -\frac{{\displaystyle \sum\limits _{i=1}^{k}}\left[ v_{\overline{x}_{i}} \cdot hue\left(\overline{p_{\overline{x}_{i}}}\right)\right]}{{\displaystyle \sum\limits _{i=1}^{k}} v_{\overline{x}_{i}}}\right| \leq \sum _{i=1}^{k} v_{x_{i}} \cdotp \left| hue\left(\overline{p_{x_{i}}}\right) -\frac{{\displaystyle \sum\limits _{i=1}^{k}}\left[ v_{x_{i}} \cdot hue\left(\overline{p_{x_{i}}}\right)\right]}{{\displaystyle \sum\limits _{i=1}^{k}} v_{x_{i}}}\right`$
+$`\sum_{i=1}^{k} v_{\overline{x}_{i}} \cdot \left| \text{hue}(\overline{p_{\overline{x}_{i}}}) -\frac{\sum_{i=1}^{k} \left[ v_{\overline{x}_{i}} \cdot \text{hue}(\overline{p_{\overline{x}_{i}}})\right]}{\sum_{i=1}^{k} v_{\overline{x}_{i}}} \right| \leq \sum_{i=1}^{k} v_{x_{i}} \cdot \left| \text{hue}(\overline{p_{x_{i}}}) -\frac{\sum_{i=1}^{k} \left[ v_{x_{i}} \cdot \text{hue}(\overline{p_{x_{i}}})\right]}{\sum_{i=1}^{k} v_{x_{i}}} \right|
+`$
