@@ -58,7 +58,7 @@ Color Notes is a MIDI-controlled smart lighting system designed to synchronize t
 * __Message Router__ listens to the incoming packets, transforms them to high-level messages, and sends them back to the corresponding __LIFX Devices.__
 * After every physical device on the network returned a response, the loop continues to the next iteration.
 
-$` \begin{array}{l}
+$$ \begin{array}{l}
 1) \ A\ "hue"\ is\ defined\ to\ be\ a\ number\ 0\leq hue\leq 360\in \mathbb{R}\\
 \\
 2) \ Define\ a\ "note"\ to\ be\ a\ pair\ of\ values\ n=( p,v) \ where\ p,v\ represent\ pitch\ and\ velocity\\
@@ -115,4 +115,4 @@ dist\left( C^{X} ,avghue\left( C^{X}\right)\right) ,\ \forall 1\leq X\leq k,\ he
 avghue( C) =avghue\left( C^{\overline{X}}\right) \ where\ \forall 1\leq X\leq k\ we\ have\\
 \\
 \sum _{i=1}^{k} v_{\overline{x}_{i}} \cdotp \left| hue\left(\overline{p_{\overline{x}_{i}}}\right) -\frac{{\displaystyle \sum\limits _{i=1}^{k}}\left[ v_{\overline{x}_{i}} \cdot hue\left(\overline{p_{\overline{x}_{i}}}\right)\right]}{{\displaystyle \sum\limits _{i=1}^{k}} v_{\overline{x}_{i}}}\right| \leq \sum _{i=1}^{k} v_{x_{i}} \cdotp \left| hue\left(\overline{p_{x_{i}}}\right) -\frac{{\displaystyle \sum\limits _{i=1}^{k}}\left[ v_{x_{i}} \cdot hue\left(\overline{p_{x_{i}}}\right)\right]}{{\displaystyle \sum\limits _{i=1}^{k}} v_{x_{i}}}\right| 
-\end{array}`$
+\end{array}$$
