@@ -1,0 +1,4 @@
+bitarray==2.8.2
+bitstring==4.1.2
+packaging==23.2
+python-rtmidi==1.5.7
