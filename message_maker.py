@@ -61,37 +61,3 @@ class MessageMaker:
             color = b"".join(MessageMaker.reversed_bytes(bitstring.pack("uint:16", field)) for field in color_fields)
             duration = MessageMaker.reversed_bytes(bitstring.pack("uint:32", self.duration))
             return reserved_8 + color + duration
-
-
-"""
-class LightSetColor(Message):
-    def __init__(
-        self,
-        target_addr,
-        source_id,
-        seq_num,
-        payload,
-        ack_requested=False,
-        response_requested=False,
-    ):
-        self.color = payload["color"]
-        self.duration = payload["duration"]
-        super(LightSetColor, self).__init__(
-            MSG_IDS[LightSetColor],
-            target_addr,
-            source_id,
-            seq_num,
-            ack_requested,
-            response_requested,
-        )
-
-    def get_payload(self):
-        reserved_8 = little_endian(bitstring.pack("uint:8", self.reserved))
-        color = b"".join(
-            little_endian(bitstring.pack("uint:16", field)) for field in self.color
-        )
-        duration = little_endian(bitstring.pack("uint:32", self.duration))
-        payload = reserved_8 + color + duration
-        payloadUi = " ".join("{:02x}".format(c) for c in payload)
-        return payload
-"""
